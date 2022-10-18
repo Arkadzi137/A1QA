@@ -1,4 +1,22 @@
 {
   "userEmail": "arche137@bk.ru",
-  "userPassword" : "QzWEr3m3"
+  "userPassword": "QzWEr3m3",
+  "userPasswordForEmail": "knj0TkQbrwQUCwBbEsqB",
+  "host": "pop.mail.ru",
+  "mailStoreType": "pop3s",
+
+  "OsAndApp": [
+    {
+      "OS": "Windows",
+      "app": "Total Security"
+    },
+    {
+      "OS": "Mac",
+      "app": "Kaspersky Safe Kids"
+    },
+    {
+      "OS": "Android",
+      "app": "Password Manager"
+    }
+  ]
 }

@@ -14,27 +14,36 @@ public class MainPage extends Form {
         super(By.xpath("//app[contains(@class ,'welcome-main')]"), "Main page");
     }
 
-    public final String login = new JsonSettingsFile("testConfig.json").getValue("/userEmail").toString();
-    public final String password = new JsonSettingsFile("testConfig.json").getValue("/userEmail").toString();
-    private final ILabel mainPage = AqualityServices.getElementFactory().getLabel(By.xpath("//app[contains(@class ,'welcome-main')]"),"main page");
+    private final String login = new JsonSettingsFile("testConfig.json").getValue("/userEmail").toString();
+    private final String password = new JsonSettingsFile("testConfig.json").getValue("/userPassword").toString();
     private final ILabel cookiesMassegeForm = AqualityServices.getElementFactory().getLabel(By.id("CybotCookiebotDialog"),"cookie box");
     private final IButton btnOkOnCookieForm = AqualityServices.getElementFactory().getButton(By.id("CybotCookiebotDialogBodyLevelButtonAccept"),"button OK");
     private final ITextBox inputEmail = AqualityServices.getElementFactory().getTextBox(By.xpath("//input[@name ='email']"),"input email");
     private final ITextBox inputPassword = AqualityServices.getElementFactory().getTextBox(By.xpath("//input[@name ='password']"),"input password");
+    private final IButton btnSignIn = AqualityServices.getElementFactory().getButton(By.xpath("//button[contains(@data-omniture-cta-name , 'Sign in')]"),"button Sign in");
 
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 
     public void clickBtnOkOnCookieForm(){
         if (cookiesMassegeForm.state().isDisplayed()) btnOkOnCookieForm.click();
     }
 
     public void enterLogin(String email){
-        inputEmail.clickAndWait();
         inputEmail.clearAndType(email);
     }
 
     public void enterPassword(String password){
-        inputEmail.clearAndType(password);
+        inputPassword.clearAndType(password);
     }
 
+    public void clickBtnSignIn(){
+        btnSignIn.click();
+    }
 
 }

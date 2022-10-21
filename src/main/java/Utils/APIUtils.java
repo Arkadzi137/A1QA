@@ -1,5 +1,6 @@
 package Utils;
 
+import aquality.selenium.browser.AqualityServices;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -12,7 +13,9 @@ public abstract class APIUtils {
         HttpResponse<JsonNode> jsonResponse = null;
         try {
             jsonResponse = Unirest.get(httpBody+get).asJson();
+
         } catch (UnirestException e) {
+            AqualityServices.getLogger().error("Unable to send Get request");
             e.printStackTrace();
         }
         return new ResponseJSONModel(jsonResponse.getStatus(), jsonResponse.getBody());
@@ -24,6 +27,7 @@ public abstract class APIUtils {
             jsonResponse = Unirest.post(httpBody+path)
                     .header("Content-Type", "application/json").body(json).asJson();
         } catch (UnirestException e) {
+            AqualityServices.getLogger().error("Unable to send Post request");
             e.printStackTrace();
         }
         return new ResponseJSONModel(jsonResponse.getStatus(), jsonResponse.getBody());

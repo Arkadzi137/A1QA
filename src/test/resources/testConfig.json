@@ -1,0 +1,10 @@
+{
+  "baseHttp": "https://jsonplaceholder.typicode.com",
+  "postfixPosts": "/posts",
+  "postfixUsers": "/users",
+  "personGet": 99,
+  "nullPersonGet": 150,
+  "numExpectedUser": 5
+
+
+}

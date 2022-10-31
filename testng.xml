@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="C:/QA_Automation/BD">
+        <classes>
+            <class name="test.tests.TestCases">
+                <methods>
+                    <include name="runTask1"/>
+                    <include name="runTask2"/>
+                    <include name="runTask3"/>
+                    <include name="runTask4"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

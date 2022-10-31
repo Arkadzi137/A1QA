@@ -1,0 +1,10 @@
+{
+  "url": "jdbc:mysql://localhost:3306/union_reporting",
+  "username": "*****",
+  "password": "*****",
+  "query1": "SELECT project.name as PROJECT, test.name as TEST, (test.end_time-test.start_time) as MIN_WORKING_TIME FROM project JOIN test ON project.id = test.project_id ORDER BY project.name, test.name",
+  "query2": "SELECT project.name as PROJECT, COUNT(test.name) as TESTS_COUNT FROM project JOIN test ON project.id = test.project_id GROUP BY project.name",
+  "query3": "SELECT project.name as PROJECT,  test.name as TEST, test.start_time as DATE FROM project JOIN test ON project.id = test.project_id WHERE test.start_time >= '2015/11/07' ORDER BY project.name, test.name",
+  "query4": "SELECT COUNT(*) FROM test WHERE browser = 'chrome' UNION SELECT COUNT(*) FROM test WHERE browser = 'firefox'"
+
+}

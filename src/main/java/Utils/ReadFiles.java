@@ -1,45 +1,19 @@
 package Utils;
 
-import aquality.selenium.core.logging.Logger;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import aquality.selenium.browser.AqualityServices;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class ReadFiles {
-
-    //public static JSONArray osAndAppsJson = (JSONArray)jsonTesting.get("OsAndApp");
-
-    static {
+    public static FileReader getExpectedJson(String filePath) {
+        FileReader fileReaderTesting = null;
         try {
-            JSONParser parser = new JSONParser();
-            try {
-                FileReader fileReaderTesting = new FileReader("./src/test/resources/expectedPost99.json");
-                jsonTesting = (JSONObject) parser.parse(fileReaderTesting);
-            }
-            catch (Exception ex) {
-                Logger.getInstance().error("Didn't found Json file");
-                throw new RuntimeException(ex);
-            }
-        } catch (Exception e) {
-            Logger.getInstance().error("Didn't found Json file");
+            fileReaderTesting = new FileReader("./src/test/resources/"+filePath+".json");
+        } catch (FileNotFoundException e) {
+            AqualityServices.getLogger().error("Json file "+filePath+" not found");
             throw new RuntimeException(e);
         }
+        return fileReaderTesting;
     }
-    public static JSONObject jsonTesting;
-//    public static List<OsAndApp> getOsAndApps(){
-//        List<OsAndApp> osAndApps = new ArrayList<>();
-//        for (int i = 0; i < osAndAppsJson.size(); i++) {
-//            OsAndApp osAndApp = new OsAndApp();
-//            JSONObject userJson = (JSONObject) osAndAppsJson.get(i);
-//            osAndApp.setOs(userJson.get("OS").toString());
-//            osAndApp.setApp (userJson.get("app").toString());
-//            osAndApps.add(osAndApp);
-//        }
-//        return osAndApps;
-//    }
 }

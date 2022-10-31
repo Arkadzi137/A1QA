@@ -6,8 +6,6 @@ import Model.UserModel;
 import aquality.selenium.browser.AqualityServices;
 import aquality.selenium.core.utilities.JsonSettingsFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
 import static Utils.APIUtils.*;
@@ -79,16 +77,5 @@ public class ApiApplicationRequest {
             e.printStackTrace();
         }
         return person;
-    }
-
-    public static FileReader getExpectedJson(String filePath) {
-        FileReader fileReaderTesting = null;
-        try {
-            fileReaderTesting = new FileReader("./src/test/resources/"+filePath+".json");
-        } catch (FileNotFoundException e) {
-            AqualityServices.getLogger().error("Json file "+filePath+" not found");
-            throw new RuntimeException(e);
-        }
-        return fileReaderTesting;
     }
 }

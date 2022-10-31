@@ -5,12 +5,7 @@
         <classes>
             <class name="test.tests.TestCases">
                 <methods>
-                    <include name="getAllPosts"/>
-                    <include name="getPost"/>
-                    <include name="getNullPost"/>
-                    <include name="postPost"/>
-                    <include name="getUser"/>
-                    <include name="getUserNumber"/>
+                    <include name="testCase"/>
                 </methods>
             </class>
         </classes>

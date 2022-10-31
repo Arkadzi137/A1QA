@@ -12,6 +12,7 @@ import org.testng.asserts.SoftAssert;
 
 import static Utils.JSONUtils.fileIsJson;
 import static Utils.ModelsUtils.*;
+import static Utils.ReadFiles.getExpectedJson;
 import static test.API.ApiApplicationRequest.*;
 
 public class TestCases {
@@ -19,17 +20,15 @@ public class TestCases {
     UserModel[] userModels = null;
 
     @Test
-    public void getAllPosts() {
+    public void testCase() {
         AqualityServices.getLogger().info("Send a GET request to get all posts (/posts)");
         PersonModel[] persons = getJsonPersons();
         Assert.assertEquals(responseJson.getStatusCode(), StatusCodes.OK.getStatus(),
                 "status code is not "+ StatusCodes.OK.getStatus()+" status is:"+ responseJson.getStatusCode());
         Assert.assertTrue(fileIsJson(responseJson.getBody().toString()), "file the file is not json");
         Assert.assertTrue(dataIsSortedById(persons), "the tags are not in ascending order");
-    }
 
-    @Test
-    public void getPost(){
+
         SoftAssert softAssert = new SoftAssert();
         int numberOfGetPerson = (int)new JsonSettingsFile("testConfig.json").getValue("/personGet");
 
@@ -43,22 +42,17 @@ public class TestCases {
         softAssert.assertFalse(actualPerson.getBody().isEmpty(), "body is empty");
         softAssert.assertFalse(actualPerson.getTitle().isEmpty(), "title is empty");
         softAssert.assertAll();
-    }
 
-    @Test
-    public void getNullPost(){
-        int numberOfGetPerson = (int)new JsonSettingsFile("testConfig.json").getValue("/nullPersonGet");
+
+        numberOfGetPerson = (int)new JsonSettingsFile("testConfig.json").getValue("/nullPersonGet");
 
         AqualityServices.getLogger().info("Send a GET request to receive post "+numberOfGetPerson);
         PersonModel personModelEmpty = getJsonPerson(numberOfGetPerson);
         Assert.assertEquals(responseJson.getStatusCode(), StatusCodes.EMPTY.getStatus(),
                 "status code is not "+StatusCodes.EMPTY.getStatus()+" status is:"+ responseJson.getStatusCode());
         Assert.assertTrue(getEmptyBodyPerson(personModelEmpty), "the request body is not empty");
-    }
 
-    @Test
-    public void postPost(){
-        SoftAssert softAssert = new SoftAssert();
+
         AqualityServices.getLogger().info("Send a POST request to create a record /posts.In the request body," +
                 " add randomly generated text to the body and title fields.The user Id field must contain 1.");
         PersonModel expectedPersonPost = new PersonModel(1,101, RandomUtils.getRandomString(8), RandomUtils.getRandomString(8));
@@ -70,11 +64,8 @@ public class TestCases {
         softAssert.assertEquals(expectedPersonPost.getUserId(), actualPersonModelPost.getUserId(), "the UserID does not match");
         softAssert.assertEquals(expectedPersonPost.getId(), actualPersonModelPost.getId(), "the id does not match");
         softAssert.assertAll();
-    }
 
-    @Test
-    public void getUser(){
-        SoftAssert softAssert = new SoftAssert();
+
         int numExpectedUser = (int)new JsonSettingsFile("testConfig.json").getValue("/numExpectedUser");
 
         AqualityServices.getLogger().info("Send a GET request to get users /users");
@@ -86,12 +77,9 @@ public class TestCases {
         softAssert.assertEquals(expectedUserModel, userModels[numExpectedUser-1],
                 "The user with the number "+numExpectedUser+" does not match the expected user with this number");
         softAssert.assertAll();
-    }
 
-    @Test
-    public void getUserNumber(){
-        SoftAssert softAssert = new SoftAssert();
-        int numExpectedUser = (int)new JsonSettingsFile("testConfig.json").getValue("/numExpectedUser");
+
+        numExpectedUser = (int)new JsonSettingsFile("testConfig.json").getValue("/numExpectedUser");
 
         AqualityServices.getLogger().info("Send a GET request to get user "+numExpectedUser);
         UserModel userModel = getJsonUser(numExpectedUser);

@@ -1,4 +1,9 @@
 {
-  "userEmail": "you"
-
+  "apiVersion": "5.131",
+  "apiBaseUrl":"https://api.vk.com/method/",
+  "ownerId": "72278845",
+  "imagePath": "src/test/resources/",
+  "uploadImageName": "test.png",
+  "downloadImageName": "downloaded.png",
+  "imageExtension": "png"
 }
